@@ -5,14 +5,19 @@
  */
 package com.share.dao;
 
+import com.share.entity.Bill;
 import com.share.entity.Group;
+import java.util.List;
 
 /**
  *
  * @author gao
  */
 public interface GroupDao {
-    Group findById(long id);
-    Group save(Group group);
-    Group delete(long id);
+    public void save(Group group);
+    public void delete(Group group);
+    public Group findById(long id);
+    public Group findByName(String name);
+    public List<Bill> listOpenBill(Group group);
+    
 }

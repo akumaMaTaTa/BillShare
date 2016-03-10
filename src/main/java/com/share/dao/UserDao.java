@@ -5,16 +5,28 @@
  */
 package com.share.dao;
 
+import com.share.entity.Group;
+import com.share.entity.PersonDue;
 import com.share.entity.User;
+import java.util.List;
 
 /**
  *
  * @author gao
  */
 public interface UserDao {
-    User findById(long id);
-    User findByName(String name);
-    void save(User user);
-    void deleteU(User user);
+
+    /**
+     *
+     * @param user
+     */
+    public void save(User user);
+    public void delete(User user);
+    public User findById(long id);
+    public User findByName(String name);
+    public void addToGroup(User user,Group group);
+    public List<PersonDue> ListOpenDue(User user);
+    
+    
     
 }

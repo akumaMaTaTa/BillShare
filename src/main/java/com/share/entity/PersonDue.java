@@ -6,16 +6,13 @@
 package com.share.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,17 +20,13 @@ import javax.persistence.Table;
  * @author gao
  */
 @Entity
-@Table(name="`GROUP`")
-public class Group implements Serializable {
+@Table(name="USERDUE")
+public class PersonDue implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    public Group() {
-        this.users = new HashSet<User>();
-    }
 
     public Long getId() {
         return id;
@@ -42,15 +35,16 @@ public class Group implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    @Column(nullable=false,unique=true)
-    private String name;
-   
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy="groups")
-    private Set<User> users;
-    
-    @OneToMany(mappedBy="group")
-    private Set<Bill> bills;
+    @ManyToOne
+    @JoinColumn(name="BILL_ID",nullable=false)
+    private Bill bill;
+    @ManyToOne
+    @JoinColumn(name="USER_ID",nullable=false)
+    private User user;
+    @Column(nullable=false)
+    private int amount;
+    @Column(nullable=false)
+    private boolean settled=false;
 
     @Override
     public int hashCode() {
@@ -62,10 +56,10 @@ public class Group implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Group)) {
+        if (!(object instanceof PersonDue)) {
             return false;
         }
-        Group other = (Group) object;
+        PersonDue other = (PersonDue) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -74,49 +68,49 @@ public class Group implements Serializable {
 
     @Override
     public String toString() {
-        return "com.hello.share.Group[ id=" + id + " ]";
+        return "com.share.entity.PersonDue[ id=" + id + " ]";
     }
 
     /**
-     * @return the name
+     * @return the bill
      */
-    public String getName() {
-        return name;
+    public Bill getBill() {
+        return bill;
     }
 
     /**
-     * @param name the name to set
+     * @param bill the bill to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setBill(Bill bill) {
+        this.bill = bill;
     }
 
     /**
-     * @return the users
+     * @return the user
      */
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * @param users the users to set
+     * @param user the user to set
      */
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     /**
-     * @return the bills
+     * @return the amount
      */
-    public Set<Bill> getBills() {
-        return bills;
+    public int getAmount() {
+        return amount;
     }
 
     /**
-     * @param bills the bills to set
+     * @param amount the amount to set
      */
-    public void setBills(Set<Bill> bills) {
-        this.bills = bills;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
     
 }

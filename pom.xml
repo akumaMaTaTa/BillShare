@@ -19,6 +19,28 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.3.1.Final</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-tools</artifactId>
+                <version>3.2.0.ga</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
+            <version>2.5.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -82,9 +104,20 @@
         <dependency>
 	<groupId>org.hibernate</groupId>
 	<artifactId>hibernate-core</artifactId>
-	<version>5.1.0.Final</version>     
-        
+	<version>5.1.0.Final</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jboss.logging</groupId>
+                    <artifactId>jboss-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+	<groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging</artifactId>
+            <version>3.3.0.Final</version>
+    </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -100,6 +133,12 @@
                 <artifactId>spring-orm</artifactId>
                 <version>4.2.5.RELEASE</version>
         </dependency>
+        <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-commons-core</artifactId>
+                <version>1.4.1.RELEASE</version>
+        </dependency>
+
 
 
 

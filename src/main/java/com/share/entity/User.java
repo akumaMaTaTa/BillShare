@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -55,6 +56,7 @@ public class User implements Serializable {
     @Column (unique=true, nullable=false)
     private String userName;
     
+    
     @Column(nullable=false)
     private  String password;
     @Column (unique=true, nullable=false)
@@ -66,7 +68,9 @@ public class User implements Serializable {
                     inverseJoinColumns = { @JoinColumn(name = "group_id", 
                                     nullable = false, updatable = false) })
     private Set<Group> groups;
-
+    
+    @OneToMany(mappedBy="user")
+    private Set<PersonDue> dues;
 
     public Set<Group> getGroups() {
             return groups;
@@ -143,6 +147,20 @@ public class User implements Serializable {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the dues
+     */
+    public Set<PersonDue> getDues() {
+        return dues;
+    }
+
+    /**
+     * @param dues the dues to set
+     */
+    public void setDues(Set<PersonDue> dues) {
+        this.dues = dues;
     }
     
 }
