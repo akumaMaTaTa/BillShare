@@ -6,17 +6,20 @@
 package com.share.dao;
 
 import com.share.entity.Bill;
-import com.share.entity.Group;
+import com.share.entity.PersonDue;
+import com.share.entity.User;
 import java.util.List;
 
 /**
  *
  * @author gao
  */
-public interface BillDao {
-    public void save(Bill bill);
-    public void delete(Bill bill);
-    public List<Bill> listOpenBill(Group group);
+public interface PersonDueDao {
+    public void save(PersonDue pd);
+    public void delete(PersonDue pd);
+    public List<PersonDue> listOpenDueForBill(Bill bill);
+    public List<PersonDue> listOpenDueForUser(User user);
+    
     
     
 }

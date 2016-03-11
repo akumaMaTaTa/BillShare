@@ -21,6 +21,7 @@ import javax.persistence.Table;
 /**
  *
  * @author gao
+ * Group(Sting name)
  */
 @Entity
 @Table(name="`GROUP`")
@@ -33,6 +34,9 @@ public class Group implements Serializable {
 
     public Group() {
         this.users = new HashSet<User>();
+    }
+    public Group(String name){
+        this.name=name;
     }
 
     public Long getId() {

@@ -24,6 +24,8 @@ import javax.persistence.Table;
 /**
  *
  * @author gao
+ * int amountSum()
+ *      return due sum
  */
 @Entity
 @Table( name = "USER")
@@ -71,6 +73,14 @@ public class User implements Serializable {
     
     @OneToMany(mappedBy="user")
     private Set<PersonDue> dues;
+    
+    public int amountSum(){
+        int sum=0;
+        for (PersonDue p:this.dues){
+            sum+=p.getAmount();
+        }
+        return sum;
+    }
 
     public Set<Group> getGroups() {
             return groups;

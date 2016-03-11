@@ -18,6 +18,5 @@ public interface GroupDao {
     public void delete(Group group);
     public Group findById(long id);
     public Group findByName(String name);
-    public List<Bill> listOpenBill(Group group);
     
 }

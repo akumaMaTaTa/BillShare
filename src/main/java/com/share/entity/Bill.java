@@ -22,6 +22,11 @@ import javax.persistence.Table;
 /**
  *
  * @author gao
+ * Bill(int amount, Group group)
+ *      About amount: + --> the amount need to pay - --> the amount need to be paid
+ * bollean checkDueSum()
+ *      check if the amount is right
+ *
  */
 @Entity
 @Table(name="BILL")
@@ -50,6 +55,23 @@ public class Bill implements Serializable {
     private Set<PersonDue> personalDue;
     private Date date = new Date();
     private String note;
+    
+    public Bill(int amount,Group group){
+        this.amount=amount;
+        this.group=group;
+    }
+    
+    public boolean checkDueSum(){
+        int sum=0;
+        for(PersonDue p : this.personalDue){
+            sum+=p.getAmount();
+        }
+        if(sum==0)
+            return true;
+        else
+            return false;
+        
+    }
 
 
     @Override

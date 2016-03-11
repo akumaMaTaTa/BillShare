@@ -19,48 +19,35 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author gao
  */
-public class GroupDaoImp implements GroupDao {
-    SessionFactory sessionFactory= new Configuration().configure().buildSessionFactory();
+public class BillDaoImp implements BillDao{
+    SessionFactory sessionFactory=new Configuration().configure().buildSessionFactory();
+
+    @Override
+    public void save(Bill bill) {
+        Session session=sessionFactory.getCurrentSession();
+        Transaction tran=session.beginTransaction();
+        session.saveOrUpdate(bill);
+        tran.commit();
+        
+    }
+
+    @Override
+    public void delete(Bill bill) {
+        Session session=sessionFactory.getCurrentSession();
+        Transaction tran=session.beginTransaction();
+        session.delete(bill);
+        tran.commit();
+    }
     
-
     @Override
-    public void save(Group group) {
+    public List<Bill> listOpenBill(Group group){
         Session session=sessionFactory.getCurrentSession();
         Transaction tran=session.beginTransaction();
-        session.saveOrUpdate(group);
-        tran.commit();
-        
+        Criteria criteria=session.createCriteria(Bill.class);
+        criteria.add(Restrictions.eq("settled", false));
+        List<Bill> opens=criteria.list();
+        return opens;
     }
-
-    @Override
-    public void delete(Group group) {
-        Session session=sessionFactory.getCurrentSession();
-        Transaction tran=session.beginTransaction();
-        session.delete(group);
-        tran.commit();
-    }
-
-    @Override
-    public Group findById(long id) {
-        Session session=sessionFactory.getCurrentSession();
-        Transaction tran=session.beginTransaction();
-        Group group=session.get(Group.class, id);
-        return group;
-
-    }
-        
-
-    @Override
-    public Group findByName(String name) {
-        Session session=sessionFactory.getCurrentSession();
-        Transaction tran=session.beginTransaction();
-        Criteria criteria=session.createCriteria(Group.class);
-        criteria.add(Restrictions.eq("name", name));
-        Group group=(Group)criteria.uniqueResult();
-        return group;
-        
-        
-    }
-
+       
     
 }

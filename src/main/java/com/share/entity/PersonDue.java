@@ -18,6 +18,7 @@ import javax.persistence.Table;
 /**
  *
  * @author gao
+ * PersonDue(int amount,Bill bill, User user)
  */
 @Entity
 @Table(name="USERDUE")
@@ -27,6 +28,13 @@ public class PersonDue implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    public PersonDue(int amount,Bill bill, User user){
+        this.amount=amount;
+        this.bill=bill;
+        this.user=user;
+                
+    }
 
     public Long getId() {
         return id;
